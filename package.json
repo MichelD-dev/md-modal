@@ -1,0 +1,48 @@
+{
+  "name": "md-modal",
+  "version": "1.0.0",
+  "description": "Md-modal is a simplest way to create dialog on your ReactJS site.",
+  "private": false,
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs"
+    },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichelD-dev/md-modal.git"
+  },
+  "keywords": [
+    "react",
+    "react-component",
+    "typescript",
+    "modal",
+    "dialog"
+  ],
+  "author": "MichelD-dev <delaunaymichel@hotmail.fr>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MichelD-dev/md-modal/issues"
+  },
+  "homepage": "https://github.com/MichelD-dev/md-modal#readme",
+  "devDependencies": {
+    "typescript": "^4.9.5",
+    "@types/react": ">=16",
+    "@types/react-dom": ">=16"
+  },
+  "peerDependencies": {
+    "react": ">=16",
+    "react-dom": ">=16"
+  },
+  "publishConfig": {
+    "acces": "public"
+  }
+}
