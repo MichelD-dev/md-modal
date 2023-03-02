@@ -1,8 +1,12 @@
-# md-modal [![npm package](https://img.shields.io/npm/v/md-modal)](https://www.npmjs.org/package/react-pure-modal)
+# React-modal
+[![npm package](https://img.shields.io/npm/v/@midly/react-modal)](https://www.npmjs.org/package/@midly/react-modal)
+[![npm package](https://img.shields.io/bundlephobia/min/@midly/react-modal)](https://www.npmjs.org/package/@midly/react-modal)
+[![npm package](https://img.shields.io/github/last-commit/micheld-dev/react-modal)](https://www.npmjs.org/package/@midly/react-modal)
+[![npm package](https://img.shields.io/npm/dw/@midly/react-modal)](https://www.npmjs.org/package/@midly/react-modal)
 
-Md-modal is a simplest way to create dialog on your ReactJS site.
+React-modal is a simplest way to create dialog on your ReactJS site.
 
-- Very small (less than 18Kb)
+- Very small (less than 20Kb)
 - Mobile friendly
 - Without dependencies
 
@@ -11,13 +15,14 @@ Md-modal is a simplest way to create dialog on your ReactJS site.
 Install this package:
 
 ```shell
-npm i md-modal
+npm i @midly/react-modal
 ```
 
 Import the component:
 
 ```jsx
-import {Modal} from 'md-modal';
+import {Modal} from '@midly/react-modal';
+import {ModalRef} from '@midly/react-modal/dist/esm/Modal'
 
 const modalRef = useRef<ModalRef>(null)
 

@@ -25,9 +25,10 @@ const modalRootId = Math.random().toString(36).slice(2, 10)
 const Modal = forwardRef<ModalRef, ModalProps>(
   ({children}, ref) => {
     const [isOpen, open, close] = useModal()
-
+    
     const modalRef = useRef<HTMLDivElement>(null)
-
+    
+    
     useImperativeHandle(
       ref,
       () => ({
