@@ -1,6 +1,6 @@
 {
   "name": "@midly/react-modal",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "React-modal is a simplest way to create dialog on your ReactJS site.",
   "private": false,
   "main": "./dist/cjs/index.js",
@@ -13,9 +13,9 @@
   ],
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir dist/cjs"
-    },
+    "build:esm": "tsc && tailwindcss build src/index.css -o dist/esm/index.css",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs && tailwindcss build src/index.css -o dist/cjs/index.css"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MichelD-dev/react-modal.git"
@@ -34,9 +34,12 @@
   },
   "homepage": "https://github.com/MichelD-dev/react-modal#readme",
   "devDependencies": {
-    "typescript": "^4.9.5",
     "@types/react": ">=16",
-    "@types/react-dom": ">=16"
+    "@types/react-dom": ">=16",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.7",
+    "typescript": "^4.9.5"
   },
   "peerDependencies": {
     "react": ">=16",
