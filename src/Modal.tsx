@@ -1,5 +1,6 @@
 import React, {
   forwardRef,
+  HTMLAttributes,
   MouseEvent,
   ReactNode,
   useCallback,
@@ -11,7 +12,7 @@ import React, {
 import {createPortal} from 'react-dom'
 import {useModal} from './useModal'
 
-interface ModalProps {
+interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode
 }
 
@@ -22,7 +23,7 @@ export interface ModalRef {
 
 const modalRootId = Math.random().toString(36).slice(2, 10)
 
-const Modal = forwardRef<ModalRef, ModalProps>(({children}, ref) => {
+const Modal = forwardRef<ModalRef, ModalProps>(({children, ...props}, ref) => {
   const [isOpen, open, close] = useModal()
 
   const modalRef = useRef<HTMLDivElement>(null)
@@ -92,7 +93,8 @@ const Modal = forwardRef<ModalRef, ModalProps>(({children}, ref) => {
         <div
           ref={modalRef}
           role="document"
-          className="bg-white max-w-lg mx-auto rounded-lg drop-shadow-xl  text-center"
+          className="bg-white max-w-lg mx-auto rounded-lg drop-shadow-xl text-center"
+          {...props}
         >
           <div className="modal-header flex justify-end px-4 py-2 relative">
             <button

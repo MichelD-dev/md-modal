@@ -6,7 +6,7 @@
 
 React-modal is a simplest way to create dialog on your ReactJS site.
 
-- Small (less than 44Kb)
+- Small (less than 45Kb)
 - Mobile friendly
 - Without dependencies
 
