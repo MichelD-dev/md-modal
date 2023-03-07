@@ -21,13 +21,26 @@ export interface ModalRef {
   close: () => void
 }
 
+/**
+Identifiant généré aléatoirement du conteneur dans le DOM où sera rendu le composant Modal.
+*/
 const modalRootId = Math.random().toString(36).slice(2, 10)
 
+/**
+Composant Modal utilisé pour afficher une fenêtre modale centrée sur l'écran.
+Utilise le hook useModal pour gérer l'état d'ouverture de la fenêtre modale.
+Les props sont transmises à la div de contenu du composant Modal.
+@param children Les éléments à afficher dans la fenêtre modale.
+@returns Le composant Modal.
+*/
 const Modal = forwardRef<ModalRef, ModalProps>(({children, ...props}, ref) => {
+  // Utilisation du hook useModal pour gérer l'état d'ouverture de la fenêtre modale.
   const [isOpen, open, close] = useModal()
 
+  // Référence pour le conteneur de la fenêtre modale.
   const modalRef = useRef<HTMLDivElement>(null)
 
+  // Utilise useImperativeHandle pour permettre l'accès à certaines fonctions de ce composant à partir d'un composant parent.
   useImperativeHandle(
     ref,
     () => ({
@@ -37,6 +50,7 @@ const Modal = forwardRef<ModalRef, ModalProps>(({children, ...props}, ref) => {
     [open, close],
   )
 
+  // Gestion de la touche Escape pour fermer la fenêtre modale.
   const handleEscape = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') close()
@@ -44,6 +58,7 @@ const Modal = forwardRef<ModalRef, ModalProps>(({children, ...props}, ref) => {
     [close],
   )
 
+  // Gestion du clic sur la zone autour de la fenêtre modale pour fermer celle-ci.
   const handleClick = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
       if (e.target === e.currentTarget) close()
@@ -51,6 +66,11 @@ const Modal = forwardRef<ModalRef, ModalProps>(({children, ...props}, ref) => {
     [close],
   )
 
+  /**
+Effet secondaire initialisant le rendu de la fenêtre modale.
+Il crée un élément de racine de modale unique dans le DOM et ajoute des écouteurs d'événements pour gérer la fermeture de la fenêtre modale en appuyant sur la touche Escape, ainsi que pour ajouter la classe 'modal-open' au corps du document et l'attribut 'data-modal-open' lorsque la fenêtre modale est ouverte.
+Il retourne une fonction de nettoyage qui retire les écouteurs d'événements et supprime l'élément de racine de modale du DOM.
+*/
   useEffect(() => {
     const modalRoot = document.createElement('div')
     modalRoot.id = `modal-root-${modalRootId}`
@@ -70,6 +90,11 @@ const Modal = forwardRef<ModalRef, ModalProps>(({children, ...props}, ref) => {
     }
   }, [handleEscape])
 
+/**
+Effet secondaire qui gère la logique de focus de la fenêtre modale.
+Il ajoute un écouteur d'événements pour le focusin sur le document, qui déplace le focus sur la fenêtre modale si l'événement focusin n'est pas déclenché à l'intérieur de la fenêtre modale.
+Il retourne une fonction de nettoyage qui supprime l'écouteur d'événements.
+*/
   useEffect(() => {
     const handleFocus = (e: FocusEvent) => {
       if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
