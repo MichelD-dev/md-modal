@@ -68,7 +68,7 @@ const Modal = forwardRef<ModalRef, ModalProps>(({children, ...props}, ref) => {
 
   /**
 Effet secondaire initialisant le rendu de la fenêtre modale.
-Il crée un élément de racine de modale unique dans le DOM et ajoute des écouteurs d'événements pour gérer la fermeture de la fenêtre modale en appuyant sur la touche Escape, ainsi que pour ajouter la classe 'modal-open' au corps du document et l'attribut 'data-modal-open' lorsque la fenêtre modale est ouverte.
+Il crée un élément de racine de modale unique dans le DOM et ajoute des écouteurs d'événements pour gérer la fermeture de la fenêtre modale en appuyant sur la touche Escape.
 Il retourne une fonction de nettoyage qui retire les écouteurs d'événements et supprime l'élément de racine de modale du DOM.
 */
   useEffect(() => {
@@ -77,20 +77,15 @@ Il retourne une fonction de nettoyage qui retire les écouteurs d'événements e
     document.body.appendChild(modalRoot)
 
     document.addEventListener('keydown', handleEscape)
-    document.body.classList.add('modal-open')
-    document.body.dataset.modalOpen = 'true'
 
     return () => {
-      document.body.classList.remove('modal-open')
-      document.body.removeAttribute('data-modal-open')
-
       document.body.removeChild(modalRoot)
 
       document.removeEventListener('keydown', handleEscape)
     }
   }, [handleEscape])
 
-/**
+  /**
 Effet secondaire qui gère la logique de focus de la fenêtre modale.
 Il ajoute un écouteur d'événements pour le focusin sur le document, qui déplace le focus sur la fenêtre modale si l'événement focusin n'est pas déclenché à l'intérieur de la fenêtre modale.
 Il retourne une fonction de nettoyage qui supprime l'écouteur d'événements.
