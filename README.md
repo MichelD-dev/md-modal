@@ -18,9 +18,10 @@ Install this package:
 npm i @midly/react-modal
 ```
 
-Import the component:
+Import the component (import modalRef type if TSX):
 
-```jsx
+```jsx 
+//component.tsx
 import {Modal} from '@midly/react-modal';
 import {ModalRef} from '@midly/react-modal/dist/esm/Modal'
 
@@ -29,9 +30,10 @@ const modalRef = useRef<ModalRef>(null)
 <Modal ref={modalRef}>Your content</Modal>
 ```
 
-You can then render the Modal component like any other React component in JSX.
+You can then render the Modal component like any other React component in JSX/TSX.
 
 ```jsx
+//component.tsx
 const showModal = useCallback<SubmitHandler>(() => modalRef.current?.open(), [])
 
 <button className="button" onClick={showModal}>Open modal</button>
